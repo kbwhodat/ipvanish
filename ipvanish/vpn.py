@@ -145,6 +145,7 @@ class IpvanishVPN:
             args.append(f"--{key}")
             if value != True:
                 args.extend(value)
+        print(args)
         return args
 
     def connect(self):

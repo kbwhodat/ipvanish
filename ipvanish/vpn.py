@@ -54,9 +54,6 @@ class IpvanishVPN:
         if self.config["ca"] == ["ca.ipvanish.com.crt"]:
             self.config["ca"][0] = os.path.join(os.path.dirname(ovpn_path), self.config["ca"][0])
 
-        # Setting keysize to fix errors
-        self.config["keysize"] = ["256"]
-
         # Retrive data from ovpn if not find in the geojson
         self.server = self.config["remote"][0]
 

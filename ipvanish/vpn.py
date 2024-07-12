@@ -38,7 +38,9 @@ class IpvanishVPN:
         for option in lines:
             option = option.split("\n")[0]
             args = option.split()
-            if len(args) == 1:
+            if args[0] == "keysize":
+                continue
+            elif len(args) == 1:
                 self.config[args[0]] = True
             else:
                 self.config[args[0]] = args[1:]

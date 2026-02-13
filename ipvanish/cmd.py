@@ -49,10 +49,10 @@ def sync():
                 shutil.rmtree(config_path, ignore_errors=True)
                 shutil.copytree(tmpfolder, config_path)
                 click.echo(
-                    f"Ipvanish ovpns files downloaded\n{len(zipfolder)-1} servers available"
+                    f"Ipvanish ovpns files downloaded\n{len(zipfolder) - 1} servers available"
                 )
     except requests.exceptions.RequestException as e:
-        click.echo(f'Failed to fetch the config archive at {SETTINGS["CONFIG_URL"]}')
+        click.echo(f"Failed to fetch the config archive at {SETTINGS['CONFIG_URL']}")
     except IpvanishError as e:
         click.echo(f"[IpvanishError] {e}", file=sys.stderr)
     except Exception:
@@ -136,7 +136,8 @@ def _get_ipvanish_config_list(countries: list, is_excluded: bool):
 
 
 def _get_ipvanish_geojson(countries: list, is_excluded: bool):
-    r = requests.get(SETTINGS["GEOJSON_URL"])
+    headers = {"Accept-Encoding": "gzip, deflate"}
+    r = requests.get(SETTINGS["GEOJSON_URL"], headers=headers)
     if r.status_code == 200:
         d = {}
         for geo in r.json():
